@@ -1,0 +1,63 @@
+# a
+def steady_state(lst):
+	import math	
+	n = len(lst) - 1
+	index = math.floor(n/2)
+	start_index = 0
+	end_index = n
+	while index != lst[index]:
+		if index < lst[index]:
+			end_index = index
+			index = math.floor((index+start_index)/2)
+		if index > lst[index]:
+			start_index = index
+			index = math.ceil((end_index+index)/2)
+		if index == start_index: break
+		
+	if index == lst[index]: return lst[index]
+	else: return None
+
+
+# d
+def cnt_steady_states(lst):
+	import math	
+	n = len(lst) - 1
+	index = math.floor(n/2)
+	start_index = 0
+	end_index = n
+	eqls_lst = []
+	eql_index = None
+	i = 0
+	while index != start_index:
+		print ("this is index: ", index)
+		print ("this is start_index: ", start_index)
+		print ("this is end_index: " , end_index)
+		print ("this is eqls_lst: " , eqls_lst)
+		i += 1
+
+		if index == lst[index]:
+			if index not in eqls_lst:
+				eqls_lst += [index]
+				end_index = index
+				index = math.floor((index+start_index)/2)
+				start_index = 0
+				print ("loop 3.1")
+				continue
+			if index in eqls_lst:
+				start_index = index
+				index = math.ceil((end_index+index)/2)
+				enx_index = n
+				print ("loop 3.2")
+				continue
+		if index < lst[index]:
+			end_index = index
+			index = math.floor((index+start_index)/2)
+			print ("loop 1")
+		if index > lst[index]:
+			start_index = index
+			index = math.ceil((end_index+index)/2)
+			print ("loop 2")
+
+		
+	return len(eqls_lst)
+
